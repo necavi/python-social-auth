@@ -12,8 +12,8 @@ class BattleNetOAuth2(BaseOAuth2):
     name = 'battlenet-oauth2'
     ID_KEY = 'accountId'
     REDIRECT_STATE = False
-    AUTHORIZATION_URL = 'https://eu.battle.net/oauth/authorize'
-    ACCESS_TOKEN_URL = 'https://eu.battle.net/oauth/token'
+    AUTHORIZATION_URL = 'https://us.battle.net/oauth/authorize'
+    ACCESS_TOKEN_URL = 'https://us.battle.net/oauth/token'
     ACCESS_TOKEN_METHOD = 'POST'
     REVOKE_TOKEN_METHOD = 'GET'
     DEFAULT_SCOPE = ['wow.profile']
@@ -33,7 +33,7 @@ class BattleNetOAuth2(BaseOAuth2):
             params['locale'] = self.setting('API_LOCALE')
 
         response = self.get_json(
-            'https://eu.api.battle.net/wow/user/characters',
+            'https://us.api.battle.net/wow/user/characters',
             params=params
         )
         return response.get('characters') or []
@@ -45,6 +45,6 @@ class BattleNetOAuth2(BaseOAuth2):
     def user_data(self, access_token, *args, **kwargs):
         """ Loads user data from service """
         return self.get_json(
-            'https://eu.api.battle.net/account/user',
+            'https://us.api.battle.net/account/user',
             params={'access_token': access_token}
         )
